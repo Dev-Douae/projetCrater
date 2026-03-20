@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '@/styles';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     marginTop: 7
@@ -51,3 +51,4 @@ export default styles = StyleSheet.create({
     backgroundColor: colors.white
   }
 });
+export default styles ;

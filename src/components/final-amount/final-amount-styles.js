@@ -2,7 +2,7 @@ import {StyleSheet} from 'react-native';
 import {colors, fonts} from '@/styles';
 import {isAndroidPlatform} from '@/helpers/platform';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   discount: {
     marginTop: 10
   },
@@ -97,3 +97,4 @@ export default styles = StyleSheet.create({
     marginTop: 0
   }
 });
+export default styles ;

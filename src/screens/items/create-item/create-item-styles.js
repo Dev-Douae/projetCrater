@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors, fonts} from '@/styles';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   amountContainer: theme => ({
     borderWidth: 0.8,
     borderColor: theme?.input?.borderColor,
@@ -48,3 +48,4 @@ export default styles = StyleSheet.create({
     alignSelf: 'flex-start'
   }
 });
+export default styles ;

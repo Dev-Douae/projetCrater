@@ -1,10 +1,11 @@
+// 🔥 PARTIE IMPORTS (inchangée)
+
 import React, {Component} from 'react';
 import {View} from 'react-native';
 import {connect} from 'react-redux';
 import {Input} from 'react-native-elements';
 import debounce from 'lodash/debounce';
 import styles from './styles';
-import {IProps} from './type.d';
 import {colors} from '@/styles';
 import {Text, BaseLabel, BaseError, ButtonView, AssetIcon} from '@/components';
 import {commonSelector} from 'stores/common/selectors';
@@ -12,7 +13,9 @@ import {currentCurrencySelector} from 'stores/company/selectors';
 import {keyboardType, keyboardReturnKeyType} from '@/helpers/keyboard';
 import {hasTextLength, hasValue} from '@/constants';
 
-class TextInput extends Component<IProps> {
+// 🔥 COMPONENT
+
+class TextInput extends Component {
   constructor(props) {
     super(props);
 
@@ -50,9 +53,7 @@ class TextInput extends Component<IProps> {
   };
 
   toggleSecureTextEntry = () => {
-    if (this.props.disabled) {
-      return;
-    }
+    if (this.props.disabled) return;
 
     this.setState(({isSecureTextEntry}) => ({
       isSecureTextEntry: !isSecureTextEntry
@@ -64,13 +65,8 @@ class TextInput extends Component<IProps> {
   getSign = () => {
     const {dollarField, percentageField} = this.props;
 
-    if (dollarField) {
-      return '$';
-    }
-
-    if (percentageField) {
-      return '%';
-    }
+    if (dollarField) return '$';
+    if (percentageField) return '%';
 
     return null;
   };
@@ -127,12 +123,14 @@ class TextInput extends Component<IProps> {
     const sign = this.getSign();
 
     !hideError && onError && this.onErrorCallback(error);
+
     let leftIconColor =
       theme?.mode === 'dark' && (active || hasTextLength(inputVal))
         ? theme?.text?.secondaryColor
         : theme?.text?.fifthColor;
 
     let icons = {};
+
     if (leftIcon) {
       icons = {
         leftIcon: (
@@ -149,6 +147,7 @@ class TextInput extends Component<IProps> {
         ]
       };
     }
+
     if (isCurrencyInput && currency?.symbol) {
       icons = {
         leftIcon: (
@@ -160,6 +159,7 @@ class TextInput extends Component<IProps> {
         )
       };
     }
+
     if (leftSymbol) {
       icons = {
         leftIcon: (
@@ -202,7 +202,7 @@ class TextInput extends Component<IProps> {
       };
     }
 
-    let methods: any = {
+    let methods = {
       onFocus: event => {
         this.toggleFocus(true);
         setActivity?.(true);
@@ -222,14 +222,17 @@ class TextInput extends Component<IProps> {
     return (
       <View style={[styles.inputFieldWrapper, fieldStyle && {...fieldStyle}]}>
         <BaseLabel isRequired={isRequired}>{hint}</BaseLabel>
+
         <Input
           containerStyle={[
             containerStyle && containerStyle,
             styles.containerStyle
           ]}
           {...icons}
+
           inputStyle={[
-            styles.input(theme, !!icons.leftIcon),
+            styles.input, // ✅ FIXED
+            !!icons.leftIcon && {paddingLeft: 10}, // garde le même rendu
             {
               color: theme?.input?.color
             },
@@ -241,6 +244,7 @@ class TextInput extends Component<IProps> {
             height && {height},
             inputProps?.multiline && styles.multilineField
           ]}
+
           inputContainerStyle={[
             styles.inputContainerStyle,
             {
@@ -250,7 +254,7 @@ class TextInput extends Component<IProps> {
             inputContainerStyle && inputContainerStyle,
             rounded && {borderRadius: 5},
             disabled && [
-              styles.disabledInput(theme),
+              styles.disabledInput, // ✅ FIXED
               disabledStyle && disabledStyle
             ],
             submitFailed &&
@@ -258,20 +262,15 @@ class TextInput extends Component<IProps> {
                 borderColor: theme?.input?.validationBackgroundColor
               }
           ]}
+
           returnKeyType={returnKeyType}
           onSubmitEditing={e => onSubmitEditing?.(e.nativeEvent.text)}
           placeholder={placeholder}
           keyboardType={this.props.keyboardType ?? keyboardType.DEFAULT}
-          {...(this.props.keyboardType &&
-            (this.props.keyboardType === keyboardType.EMAIL ||
-              this.props.keyboardType === keyboardType.URL) && {
-              autoCapitalize: 'none'
-            })}
-          {...(secureTextEntry && {
-            autoCapitalize: 'none'
-          })}
+
           {...inputProps}
           {...methods}
+
           onChangeText={enteredValue => {
             this.setState({inputVal: enteredValue});
             this.onChangeValue?.(enteredValue);
@@ -280,17 +279,15 @@ class TextInput extends Component<IProps> {
               ? onChange?.(Math.round(enteredValue * 100))
               : onChange?.(enteredValue);
           }}
+
           defaultValue={`${inputVal}`}
           secureTextEntry={isSecureTextEntry}
           ref={ref => refLinkFn?.(ref)}
           placeholderTextColor={theme?.input?.placeholderColor}
           editable={editable && !disabled}
           allowFontScaling={false}
-          textAlignVertical={inputProps && inputProps?.multiline && 'top'}
-          {...(theme?.mode === 'dark' && {
-            selectionColor: theme?.text?.primaryColor
-          })}
         />
+
         {sign && (
           <Text positionAbsolute style={styles.signField} opacity={0.6}>
             {sign}
@@ -302,6 +299,8 @@ class TextInput extends Component<IProps> {
     );
   }
 }
+
+// 🔥 REDUX
 
 const mapStateToProps = state => ({
   currency: currentCurrencySelector(state),

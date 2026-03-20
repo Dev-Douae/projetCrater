@@ -1,10 +1,8 @@
 import React from 'react';
+import {View, StyleSheet, Animated, Easing} from 'react-native';
 import PropTypes from 'prop-types';
-import {View, StyleSheet, Animated, ViewPropTypes, Easing} from 'react-native';
 
-const ViewPropTypesStyle = ViewPropTypes
-  ? ViewPropTypes.style
-  : View.propTypes.style;
+const ViewPropTypesStyle = PropTypes.any;
 
 export class AnimatedCircularProgress extends React.PureComponent {
   static propTypes = {

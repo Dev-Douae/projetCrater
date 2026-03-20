@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {fonts} from '@/styles';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   listViewScrollContainerStyle: {
     paddingTop: 10
   },
@@ -21,3 +21,4 @@ export default styles = StyleSheet.create({
     marginTop: 10
   }
 });
+export default styles ;

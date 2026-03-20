@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {colors} from '@/styles';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   dividerLine: {
     marginVertical: 18,
     backgroundColor: colors.gray,
@@ -34,3 +34,4 @@ export default styles = StyleSheet.create({
     borderWidth: 0
   }
 });
+export default styles ;

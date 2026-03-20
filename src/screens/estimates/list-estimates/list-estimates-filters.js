@@ -9,7 +9,7 @@ let selectedFromDateValue = '';
 let selectedToDate = '';
 let selectedToDateValue = '';
 
-export default estimateFilterFields = ({props, setFormField}) => {
+const estimateFilterFields = ({props, setFormField}) => {
   const {fetchCustomers, customers, navigation} = props;
 
   const selectFields = [
@@ -88,3 +88,4 @@ export default estimateFilterFields = ({props, setFormField}) => {
     dropdownFields
   };
 };
+export default estimateFilterFields;

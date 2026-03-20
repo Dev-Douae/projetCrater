@@ -8,7 +8,7 @@ let selectedFromDateValue = '';
 let selectedToDate = '';
 let selectedToDateValue = '';
 
-export default expensesFilter = ({props, setFormField}) => {
+const expensesFilter = ({props, setFormField}) => {
   const {
     categories,
     fetchCategories,
@@ -89,3 +89,4 @@ export default expensesFilter = ({props, setFormField}) => {
     datePickerFields
   };
 };
+export default expensesFilter ;

@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {fonts} from '@/styles';
 
-export default styles = StyleSheet.create({
+const styles = StyleSheet.create({
   itemContainer: (theme, disabled) => ({
     borderWidth: 1,
     borderColor: theme?.input?.borderColor,
@@ -36,3 +36,4 @@ export default styles = StyleSheet.create({
     })
   })
 });
+export default styles ;
