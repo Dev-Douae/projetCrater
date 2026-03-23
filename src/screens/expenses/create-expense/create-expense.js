@@ -38,6 +38,9 @@ import {
   checkExchangeRate,
   checkExchangeRateProvider
 } from 'stores/common/actions';
+import { TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { routes } from '@/navigation';
 
 export default class CreateExpense extends React.Component<IProps, IStates> {
   customerReference: any;
@@ -409,6 +412,16 @@ export default class CreateExpense extends React.Component<IProps, IStates> {
           disabled={disabled}
           height={80}
         />
+        <View style={styles.header}>
+  <Text style={styles.headerTitle}>Nouvelle dépense</Text>
+  <TouchableOpacity 
+    onPress={() => navigation.navigate(routes.SCAN_INVOICE)}
+    style={styles.scanButton}
+  >
+    <Ionicons name="scan-outline" size={24} color="#2089dc" />
+    <Text style={styles.scanButtonText}>Scanner</Text>
+  </TouchableOpacity>
+</View>
 
         <CustomField {...this.props} />
       </DefaultLayout>

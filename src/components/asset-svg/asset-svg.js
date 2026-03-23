@@ -35,10 +35,19 @@ export class AssetSvg extends Component<IProps> {
   };
 
   render() {
-    const {name, fill, width = '22', height = '22', style} = this.props;
+  const {name, fill, width = '22', height = '22', style} = this.props;
+
+  const Icon = AssetSvg.icons[name];
+
+  if (!Icon) {
+    console.warn('Icon not found:', name);
+    return null;
+  }
+
+  if (typeof Icon === 'string') {
     return (
       <SvgXml
-        xml={name}
+        xml={Icon}
         width={width}
         height={height}
         fill={fill}
@@ -46,4 +55,14 @@ export class AssetSvg extends Component<IProps> {
       />
     );
   }
+
+  return (
+    <Icon
+      width={width}
+      height={height}
+      fill={fill}
+      style={style}
+    />
+  );
+}
 }

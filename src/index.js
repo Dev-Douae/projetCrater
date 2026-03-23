@@ -91,11 +91,9 @@ export default () => {
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor}>
-        {fontLoaded && (
-          <AppearanceProvider>
-            <App />
-          </AppearanceProvider>
-        )}
+        <AppearanceProvider>
+  <App />
+</AppearanceProvider>
       </PersistGate>
     </Provider>
   );
